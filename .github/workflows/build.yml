@@ -1,0 +1,40 @@
+name: Build
+on:
+  push:
+    branches: main
+
+jobs:
+  build-bindings:
+    runs-on: ${{ matrix.os }}
+    permissions:
+        contents: write
+        packages: write
+    strategy:
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest, windows-latest, macos-latest, pi-hosted]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    # https://github.com/nodejs/node-gyp/issues/1663#issuecomment-535049449
+    - name: Patch node gyp on Windows to support Visual Studio 2019
+      if: matrix.os == 'windows-latest'
+      shell: powershell
+      run: |
+        npm install --global node-gyp@latest
+        npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
+    - name: Ensure latest macOS SDK is used
+      if: matrix.os == 'macos-latest'
+      shell: zsh {0}
+      run: |
+        sudo xcode-select --switch "$(find /Applications -mindepth 1 -maxdepth 1 ! -type l | grep "Xcode_[\.0-9]*app" | sort -V | tail -1)/Contents/Developer"
+        sudo rm -Rf /Library/Developer/CommandLineTools/SDKs/*
+    - name: Update NPM Client
+      run: npm install -g npm
+    - name: Install Modules
+      run: npm install
+    - name: Rebuild serialport and Commit
+      run: node --unhandled-rejections=strict build.js ${{ matrix.os }} ${{ secrets.pico }} ${{ secrets.EMAIL }}
