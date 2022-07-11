@@ -55,4 +55,4 @@ jobs:
     - name: Install Modules
       run: npm install
     - name: Rebuild serialport and Commit
-      run: node --unhandled-rejections=strict build.js ${{ matrix.os }} ${{ secrets.GITHUB_TOKEN }} ${{ secrets.EMAIL }}
+      run: node --unhandled-rejections=strict build.js ${{ matrix.os }} ${{ secrets.pico }} ${{ secrets.EMAIL }}
