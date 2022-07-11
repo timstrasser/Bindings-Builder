@@ -38,7 +38,7 @@ async function build(matrix, token, email) {
     let codeVersions = pkg.codeVersions;
 
     let repoFolder = path.resolve(path.join("..", "..", "Pico-Go"));
-    let git = new Git("https://github.com/timstrasser/Pico-Go", "timstrasser", token, repoFolder, "Tim Strasser", email);
+    let git = new Git("https://github.com/timstrasser/Pico-Go-main", "timstrasser", token, repoFolder, "Tim Strasser", email);
 
     await git.clone();
     await git.checkout("develop");
