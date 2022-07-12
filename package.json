@@ -37,7 +37,7 @@
     "electron-rebuild": "^3.2.8",
     "lodash": "^4.17.21",
     "node-abi": "^3.22.0",
-    "semver": "^7.3.5",
+    "semver": "^7.3.7",
     "serialport": "^9.2.0"
   }
 }
