@@ -73,3 +73,11 @@ The information for `package.json` can be determined as follows:
    The Electron version is the `target` value. The Insider build is on the `master` branch and other RTM versions are tagged.
 
 2. Look up the `modules` version at the [Electron Releases repo](https://github.com/electron/releases)'s [`lite.json`](https://github.com/electron/releases/blob/master/lite.json) file.
+
+## Getting GitHub workflow to work
+1. Generate Personal Acces token for Account
+ - Settings
+ - Dev Settings
+ - PAT ...
+2. Add "build" environment for this Repo
+3. Add generated PAT to environment secrets with the name "pico"
