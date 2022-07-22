@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "codeVersions": [
+     {
+      "code": "1.69.2",
+      "electron": "18.3.5",
+      "modules": 107
+    },
     {
       "code": "1.69.0",
       "electron": "18.3.5",
